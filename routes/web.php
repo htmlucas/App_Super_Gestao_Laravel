@@ -9,6 +9,8 @@ use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
 
@@ -25,17 +27,27 @@ route::post('/login',[LoginController::class , 'autenticar' ])->name('site.login
 Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function(){    
     route::get('/home',[HomeController::class,'index' ])->name('app.home');
     route::get('/sair',[LoginController::class,'sair' ])->name('app.sair');
-    route::get('/cliente',[ClienteController::class,'index' ] )->name('app.cliente');
 
     //produtos
     route::resource('produto',ProdutoController::class);
     /* route::get('/produto',[ProdutoController::class,'index' ] )->name('app.produto');
     route::get('/produto/create',[ProdutoController::class,'create' ] )->name('app.produto.create'); */
     
-
     //produto detalhe
     route::resource('produto-detalhe',ProdutoDetalheController::class);
 
+    //cliente
+    route::resource('cliente',ClienteController::class);
+    //pedido
+    route::resource('pedido',PedidoController::class);
+    
+    
+    //pedido-produto
+    //route::resource('pedido-produto',PedidoProdutoController::class);
+    Route::get('pedido-produto/create/{pedido}',[PedidoProdutoController::class,'create'])->name('pedido-produto.create');
+    Route::post('pedido-produto/store/{pedido}',[PedidoProdutoController::class,'store'])->name('pedido-produto.store');
+
+    
     //fornecedor
     route::get('/fornecedor',[FornecedorController::class, 'index'])->name('app.fornecedor');
     route::post('/fornecedor/listar',[FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
