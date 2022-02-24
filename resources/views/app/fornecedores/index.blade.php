@@ -25,6 +25,7 @@
                     <input type="text" name="uf" class="borda-preta" placeholder="UF">
                     <input type="text" name="email" class="borda-preta" placeholder="Email">
                     <button type="submit" class="borda-preta">Pesquisar</button>
+                    <small id="emailHelp" class="form-text text-muted">Ao clicar em pesquisar(com ou sem informacao) irão ser mostrado todos os fornecedores</small>
                 </form>
 
             </div>
